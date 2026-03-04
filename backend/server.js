@@ -13,8 +13,14 @@ const dashboardRoutes = require("./routes/dashboardRoutes");
 
 const app = express();
 
-// Middlewares
-app.use(cors());
+// ✅ FIXED CORS
+app.use(
+  cors({
+    origin: "https://hospital-frontend-o7ai.onrender.com",
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 
 // Routes
@@ -26,7 +32,6 @@ app.use("/api/billing", billingRoutes);
 app.use("/api/medical-records", medicalRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 
-// IMPORTANT FOR DEPLOYMENT
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
