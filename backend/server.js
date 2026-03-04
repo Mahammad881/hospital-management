@@ -13,13 +13,9 @@ const dashboardRoutes = require("./routes/dashboardRoutes");
 
 const app = express();
 
-// ✅ FIXED CORS
-app.use(
-  cors({
-    origin: "https://hospital-frontend-o7ai.onrender.com",
-    credentials: true,
-  })
-);
+/* ✅ FIXED CORS (Handles Preflight Properly) */
+app.use(cors());
+app.options("*", cors()); // very important for OPTIONS preflight
 
 app.use(express.json());
 
