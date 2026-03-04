@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/auth";
+const API_URL = "https://hospital-backend-4gl5.onrender.com/api/auth/login";
 
 function Login({ setToken }) {
   const navigate = useNavigate();
