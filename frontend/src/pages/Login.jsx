@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const API_URL = "https://hospital-backend-4gl5.onrender.com/api/auth";
+// ✅ Backend Base URL (NO trailing slash)
+const API_URL = "https://hospital-backend-4gl5.onrender.com";
 
 function Login({ setToken }) {
   const navigate = useNavigate();
@@ -28,9 +29,13 @@ function Login({ setToken }) {
     setLoading(true);
 
     try {
-      const { data } = await axios.post(`${API_URL}/login`, formData);
+      // ✅ Full correct URL
+      const response = await axios.post(
+        `${API_URL}/api/auth/login`,
+        formData
+      );
 
-      const { token, role } = data;
+      const { token, role } = response.data;
 
       if (!token || !role) {
         throw new Error("Invalid server response");
@@ -42,10 +47,12 @@ function Login({ setToken }) {
 
       setToken(token);
 
-      // Redirect to dashboard
+      // Redirect
       navigate("/dashboard", { replace: true });
 
     } catch (err) {
+      console.error(err); // 👈 helps debugging
+
       setError(
         err.response?.data?.message || "Invalid email or password"
       );
