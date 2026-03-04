@@ -1,5 +1,7 @@
 const mysql = require("mysql2");
 
+console.log("DB_HOST:", process.env.DB_HOST);
+
 const db = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -11,4 +13,4 @@ const db = mysql.createPool({
   }
 });
 
-module.exports = db.promise();// Exporting promise-based pool for async/await
+module.exports = db.promise();
