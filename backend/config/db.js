@@ -1,5 +1,8 @@
-const mysql = require("mysql2");
+const { Pool } = require("pg");
 
-const db = mysql.createPool(process.env.MYSQL_PUBLIC_URL);
+const db = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false }
+});
 
-module.exports = db.promise();
+module.exports = db;
