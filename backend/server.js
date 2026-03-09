@@ -33,3 +33,7 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+db.connect()
+  .then(() => console.log("Database connected"))
+  .catch(err => console.error("DB connection error:", err));
